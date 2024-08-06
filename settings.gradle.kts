@@ -21,5 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Klivvr Internship Task"
 include(":app")
-include(":Data")
-include(":Domain")
