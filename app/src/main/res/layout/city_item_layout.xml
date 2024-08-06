@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+
+    app:cardUseCompatPadding="true"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:id="@+id/cityNameTV"
+            style="@style/HeadLineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Los Angelos"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/countryTV"
+            style="@style/HeadLineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="US"
+            app:layout_constraintStart_toEndOf="@id/cityNameTV"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <TextView
+            android:id="@+id/cityIdTV"
+            style="@style/HeadLineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12345"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityNameTV">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/mapIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/map"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityIdTV"></ImageView>
+
+        <TextView
+            android:id="@+id/latTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="23434"
+            android:textColor="@color/lightText"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/mapIcon"
+            app:layout_constraintStart_toEndOf="@+id/mapIcon"
+            app:layout_constraintTop_toTopOf="@+id/mapIcon">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/commaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text=","
+            android:textColor="@color/lightText"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/latTV"
+            app:layout_constraintStart_toEndOf="@+id/latTV"
+            app:layout_constraintTop_toTopOf="@+id/latTV">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/longTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/inter_regular"
+            android:text="243234"
+            android:textColor="@color/lightText"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/commaTV"
+            app:layout_constraintStart_toEndOf="@+id/commaTV"
+            app:layout_constraintTop_toTopOf="@+id/commaTV">
+
+        </TextView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toMapBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:backgroundTint="@color/btnColor"
+
+            android:text="Exact Location"
+            android:textColor="@color/black"
+            app:cornerRadius="4dp"
+            app:icon="@drawable/baseline_arrow_forward_ios_24"
+            app:iconGravity="textEnd"
+            app:iconSize="17dp"
+            app:iconTint="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/commaTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/longTV">
+
+        </com.google.android.material.button.MaterialButton>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
