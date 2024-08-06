@@ -1,70 +1,111 @@
 package com.mobjoy.klivvrinternshiptask
 
 import android.os.Bundle
-import android.util.Log
+
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.mobjoy.klivvrinternshiptask.data.CitiesResponseItem
 import com.mobjoy.klivvrinternshiptask.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     private lateinit var viewModel: CitiesViewModel
+    private lateinit var sortedCities: List<CitiesResponseItem>
     private var citiesAdapter = CitiesAdapter(listOf())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
     }
 
     private fun initViews() {
-        viewBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
-        viewModel = ViewModelProvider(this)[CitiesViewModel::class.java]
+        settingUpViewBinding()
+        settingUpViewModel()
         utilizingViewModel()
         settingRvAdapter()
+        settingSearch()
+
     }
 
     private fun utilizingViewModel() {
         viewModel.getAllCities()
         lifecycleScope.launch(Dispatchers.Main) {
             viewModel.citiesList.collect { data ->
-
-                val sortedCities = data.sortedBy { city ->
-                    city.name
-                }
-
                 if (data[0].name != null) {
                     handleLoadingContent()
-                    citiesAdapter.bindCitiesList(sortedCities)
+                    citiesAdapter.bindCitiesList(data)
+                    sortedCities = data
                 }
-
-                Log.e("citiesList1", sortedCities.toString())
-
             }
         }
-
-
     }
-
     private fun handleLoadingContent() {
         viewModel.isLoading.observe(this@MainActivity) {
             if (it == true) {
                 viewBinding.progressBar.isVisible = true
                 viewBinding.citiesRV.isVisible = false
+                viewBinding.search.visibility = View.INVISIBLE
+
             } else {
                 viewBinding.progressBar.isVisible = false
                 viewBinding.citiesRV.isVisible = true
+                viewBinding.search.visibility = View.VISIBLE
             }
         }
     }
-
     private fun settingRvAdapter() {
         viewBinding.citiesRV.adapter = citiesAdapter
     }
+
+    private fun settingUpViewBinding() {
+        viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
+    }
+
+    private fun settingUpViewModel() {
+        viewModel = ViewModelProvider(this)[CitiesViewModel::class.java]
+    }
+
+    private fun settingSearch() {
+
+        viewBinding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val list = mutableListOf<CitiesResponseItem>()
+                if (!newText.isNullOrBlank()) {
+                    val result = viewModel.getDataFromTrie(query = newText)
+                    val cityMap = viewModel.getCityMap()
+                    result.forEach { city ->
+                        cityMap[city]?.let {
+                            list.add(it)
+                        }
+                    }
+                    citiesAdapter.bindCitiesList(list)
+                } else {
+                    list.clear()
+                    citiesAdapter.bindCitiesList(sortedCities)
+                }
+                return true
+
+            }
+        }
+        )
+
+
+    }
 }
+
+
+
