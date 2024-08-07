@@ -14,7 +14,7 @@ This repository contains my solution for the Android Internship assignment. The 
 - UI and UX: Displays the filtered cities in a responsive, scrollable list, sorted alphabetically by city name and country code. The list updates dynamically as the user types or modifies the filter.
 - Kotlin and Android Jetpack: The application is developed using Kotlin and adheres to modern Android development practices, including the use of Android Jetpack components.
 - Restrictions: The solution avoids database implementations and only uses third-party libraries for JSON serialization and dependency injection.
-- Multiple sceen sizes are supported
+- Multiple screen sizes are supported
 
 ## Searching Method
 
