@@ -1,4 +1,4 @@
-package com.mobjoy.klivvrinternshiptask
+package com.mobjoy.klivvrinternshiptask.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

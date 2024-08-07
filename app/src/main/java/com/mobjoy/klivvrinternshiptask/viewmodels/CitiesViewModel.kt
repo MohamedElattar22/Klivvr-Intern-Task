@@ -1,4 +1,4 @@
-package com.mobjoy.klivvrinternshiptask
+package com.mobjoy.klivvrinternshiptask.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

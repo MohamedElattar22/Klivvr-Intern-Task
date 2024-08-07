@@ -21,9 +21,7 @@
             android:layout_marginTop="10dp"
             android:text="Los Angelos"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </TextView>
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <TextView
             android:id="@+id/countryTV"
@@ -105,10 +103,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:backgroundTint="@color/btnColor"
-
             android:text="Exact Location"
             android:textColor="@color/black"
-            android:textSize="8sp"
             app:cornerRadius="4dp"
             app:icon="@drawable/baseline_arrow_forward_ios_24"
             app:iconGravity="textEnd"

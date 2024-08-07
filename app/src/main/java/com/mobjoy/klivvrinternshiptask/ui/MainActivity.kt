@@ -1,16 +1,17 @@
-package com.mobjoy.klivvrinternshiptask
+package com.mobjoy.klivvrinternshiptask.ui
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.mobjoy.klivvrinternshiptask.adapters.CitiesAdapter
 import com.mobjoy.klivvrinternshiptask.databinding.ActivityMainBinding
+import com.mobjoy.klivvrinternshiptask.viewmodels.CitiesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

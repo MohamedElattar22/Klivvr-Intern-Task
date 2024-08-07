@@ -1,4 +1,4 @@
-package com.mobjoy.data
+package com.mobjoy.data.di
 
 import android.content.Context
 import com.google.gson.Gson

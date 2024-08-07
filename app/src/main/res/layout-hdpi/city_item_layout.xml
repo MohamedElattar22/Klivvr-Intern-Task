@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Los Angelos"
+            android:text="@string/sample_city"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -31,9 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="US"
+            android:text="@string/sample_country"
             app:layout_constraintStart_toEndOf="@id/cityNameTV"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
 
         <TextView
             android:id="@+id/cityIdTV"
@@ -53,7 +55,9 @@
             android:layout_marginStart="15dp"
             android:src="@drawable/map"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cityIdTV"></ImageView>
+            app:layout_constraintTop_toBottomOf="@+id/cityIdTV">
+
+        </ImageView>
 
         <TextView
             android:id="@+id/latTV"
@@ -61,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/inter_regular"
-            android:text="23434"
+            android:text="@string/sample_lat"
             android:textColor="@color/lightText"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/mapIcon"
@@ -75,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text=","
+            android:text="@string/comma_sample"
             android:textColor="@color/lightText"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/latTV"
@@ -90,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/inter_regular"
-            android:text="243234"
+            android:text="@string/sample_id"
             android:textColor="@color/lightText"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/commaTV"
@@ -105,10 +109,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:backgroundTint="@color/btnColor"
-
-            android:text="Exact Location"
+            android:text="@string/exact_location"
             android:textColor="@color/black"
-            android:textSize="8sp"
             app:cornerRadius="4dp"
             app:icon="@drawable/baseline_arrow_forward_ios_24"
             app:iconGravity="textEnd"
