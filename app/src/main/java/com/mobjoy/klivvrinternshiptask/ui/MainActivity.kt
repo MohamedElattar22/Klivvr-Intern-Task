@@ -1,15 +1,17 @@
-package com.mobjoy.klivvrinternshiptask
+package com.mobjoy.klivvrinternshiptask.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.mobjoy.klivvrinternshiptask.data.CitiesResponseItem
+import com.mobjoy.klivvrinternshiptask.adapters.CitiesAdapter
 import com.mobjoy.klivvrinternshiptask.databinding.ActivityMainBinding
+import com.mobjoy.klivvrinternshiptask.viewmodels.CitiesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +21,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
     private lateinit var viewModel: CitiesViewModel
-    private lateinit var sortedCities: List<CitiesResponseItem>
+    private lateinit var sortedCities: List<com.mobjoy.domain.model.CitiesResponseItem>
     private var citiesAdapter = CitiesAdapter(listOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         utilizingViewModel()
         settingRvAdapter()
         settingSearch()
-
     }
 
     private fun utilizingViewModel() {
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun handleLoadingContent() {
         viewModel.isLoading.observe(this@MainActivity) {
             if (it == true) {
@@ -62,8 +64,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun settingRvAdapter() {
         viewBinding.citiesRV.adapter = citiesAdapter
+        citiesAdapter.onCityClickListener =
+            CitiesAdapter.OnCityClickListener { cityItem, position ->
+                val uri =
+                    "geo:${cityItem.coord?.lat}," +
+                            "${cityItem.coord?.lon}?q=${cityItem.coord?.lat}" +
+                            ",${cityItem.coord?.lon}(${cityItem.name}, ${cityItem.country})"
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                startActivity(intent)
+
+            }
     }
 
     private fun settingUpViewBinding() {
@@ -83,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                val list = mutableListOf<CitiesResponseItem>()
+                val list = mutableListOf<com.mobjoy.domain.model.CitiesResponseItem>()
                 if (!newText.isNullOrBlank()) {
                     val result = viewModel.getDataFromTrie(query = newText)
                     val cityMap = viewModel.getCityMap()

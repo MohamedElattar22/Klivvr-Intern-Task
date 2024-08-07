@@ -1,5 +1,4 @@
-package com.mobjoy.klivvrinternshiptask.data
-
+package com.mobjoy.domain.model
 
 data class CitiesResponseItem(
     val country: String? = null,

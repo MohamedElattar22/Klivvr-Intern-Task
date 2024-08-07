@@ -4,5 +4,6 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     id("com.google.dagger.hilt.android") version "2.50" apply false
     alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin) apply false
 
 }

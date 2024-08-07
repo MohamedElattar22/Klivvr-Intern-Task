@@ -1,12 +1,12 @@
-package com.mobjoy.klivvrinternshiptask
+package com.mobjoy.klivvrinternshiptask.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mobjoy.klivvrinternshiptask.data.CitiesResponseItem
-import com.mobjoy.klivvrinternshiptask.repository.CitiesRepository
-import com.mobjoy.klivvrinternshiptask.searching.Trie
+import com.mobjoy.domain.model.CitiesResponseItem
+import com.mobjoy.domain.usecases.getAllCitiesUseCase
+import com.mobjoy.klivvrinternshiptask.searchalgorithm.Trie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,12 +15,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CitiesViewModel @Inject constructor(
-    private val citiesRepository: CitiesRepository
+    private val getAllCitiesUseCase: getAllCitiesUseCase
 ) : ViewModel() {
     val trie = Trie()
     private val cityMap: MutableMap<String, CitiesResponseItem> = mutableMapOf()
     val citiesList = MutableStateFlow(listOf(CitiesResponseItem()))
-    var flag: Boolean = false
+    private var flag: Boolean = false
     val isLoading = MutableLiveData(true)
 
 
@@ -29,12 +29,9 @@ class CitiesViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 isLoading.postValue(false)
-                var result = citiesRepository.getAllCities()
-                result = result.sortedBy { city ->
-                    city.name
-                }
-                result.forEach { city ->
+                var result = getAllCitiesUseCase.invoke()
 
+                result.forEach { city ->
                     cityMap[city.name.toString()] = city
                 }
                 insertDataToTrie(result)

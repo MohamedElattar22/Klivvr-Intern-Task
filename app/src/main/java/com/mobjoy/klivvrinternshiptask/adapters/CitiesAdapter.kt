@@ -1,13 +1,15 @@
-package com.mobjoy.klivvrinternshiptask
+package com.mobjoy.klivvrinternshiptask.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mobjoy.klivvrinternshiptask.data.CitiesResponseItem
+import com.mobjoy.domain.model.CitiesResponseItem
 import com.mobjoy.klivvrinternshiptask.databinding.CityItemLayoutBinding
 
 class CitiesAdapter(private var list: List<CitiesResponseItem?>?) :
     RecyclerView.Adapter<CitiesAdapter.MyViewHolder>() {
+
+    var onCityClickListener: OnCityClickListener? = null
     class MyViewHolder(val viewBinding: CityItemLayoutBinding) :
         RecyclerView.ViewHolder(viewBinding.root)
 
@@ -36,7 +38,17 @@ class CitiesAdapter(private var list: List<CitiesResponseItem?>?) :
             holder.viewBinding.latTV.text = item.coord?.lat.toString()
             holder.viewBinding.longTV.text = item.coord?.lon.toString()
         }
+        onCityClickListener?.let { onCityClickListener ->
+            holder.viewBinding.toMapBtn.setOnClickListener {
+                onCityClickListener.onClick(item!!, position)
+            }
+        }
 
+
+    }
+
+    fun interface OnCityClickListener {
+        fun onClick(cityItem: CitiesResponseItem, position: Int)
 
     }
 

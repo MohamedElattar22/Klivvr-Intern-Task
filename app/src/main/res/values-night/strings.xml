@@ -1,10 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Klivvr Internship Task</string>
-    <string name="title_activity_maps">MapsActivity</string>
     <string name="exact_location">Exact Location</string>
     <string name="sample_id">243234</string>
     <string name="comma_sample">,</string>
     <string name="sample_lat">23434</string>
     <string name="sample_country">US</string>
-    <string name="sample_city">Los Angelos</string>
 </resources>

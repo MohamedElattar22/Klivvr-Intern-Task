@@ -1,4 +1,4 @@
-package com.mobjoy.klivvrinternshiptask.searching
+package com.mobjoy.klivvrinternshiptask.searchalgorithm
 
 import android.os.Build
 import androidx.annotation.RequiresApi
